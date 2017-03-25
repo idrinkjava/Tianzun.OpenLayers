@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>智慧城管地图 Demo</title>
+    <meta charset="utf-8" />
+    <link href="openlayers/v3.20.1-dist/ol.css" rel="stylesheet" />
+    <style type="text/css">
+        .leftDiv {
+            width: 250px;
+            float: left;
+        }
+        
+        .leftDiv button {
+            margin-right: 5px;
+            margin-top: 5px;
+        }
+        
+        .leftDiv ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .leftDiv ul li {
+            margin: 5px;
+            padding: 0;
+        }
+        
+        .rightDiv {
+            float: left;
+            width: calc(100% - 251px);
+            border-left: 1px solid rgb(178, 178, 178);
+        }
+    </style>
+</head>
+
+<body style="margin:0;padding:0">
+    <div>
+        <div class="leftDiv">
+            <ul>
+                <li><button id="btnAddZEWGLayer">叠加所有责任网格图层</button></li>
+                <li><button id="btnRemoveZEWGLayer">移除所有责任网格图层</button></li>
+                <li><button id="btnAddFeatureLayer">叠加责任网格矢量图</button></li>
+                <li><button id="btnAddMarker">添加单个标注</button></li>
+                <li><button id="btnAddPolyline">添加线</button></li>
+                <li><button id="btnAddCircle">添加圆</button></li>
+                <li><button id="btnAddRectangle">添加矩形</button></li>
+                <li><button id="btnAddPolygon">添加多边形</button></li>
+                <li><button id="btnDragRectangle">拉框查找</button></li>
+                <li><button id="btnDragCircle">拉圆查找</button></li>
+                <li><button id="btnAddTrack">绘制轨迹</button></li>
+                <li><button id="btnTackPlayback">轨迹回放</button></li>
+                <li>
+                    <button id="btnDrawPoint">绘制点</button><button id="btnDrawPolyline">绘制线</button><button id="btnDrawCircle">绘制圆形</button><br
+                    />
+                    <button id="btnDrawRect">绘制矩形</button>
+                    <button id="btnDrawPolygon">绘制多边形</button>
+                    <button id="btnClearDraw">退出绘制模式</button><br />
+                    <textarea id="txtDrawData" style="width:230px;height:80px; margin-top:5px;background-color:#eee;" readonly="readonly"></textarea>
+                </li>
+                <li><button id="btnClear">清空地图</button></li>
+            </ul>
+        </div>
+        <div id="map" class="map rightDiv"></div>
+    </div>
+    <script src="openlayers/v3.20.1-dist/ol.js"></script>
+    <script src="jquery/jquery-1.10.2.min.js"></script>
+    <script src="openlayers/tgismap.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //计算map容器的高度不能自适应，计算map容器的高度
+            $("#map").height($(document).innerHeight());
+
+            //初始化地图
+            var tgisMap = new TGisMap("map");
+
+            //在地图上添加标注
+            // tgisMap.viewPoint({
+            //    x: 120.42747309716121,
+            //    y: 30.096535068597046,
+            //   isCenter: true
+            // });
+
+            //在地图上 绘制标注
+            tgisMap.drawPoint({
+                x: 120.42747309716121,
+                y: 30.096535068597046,
+                isCenter: true,
+                callback: function (data) {
+                    console.log(data);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
